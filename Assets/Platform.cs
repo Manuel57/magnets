@@ -7,11 +7,12 @@ public class Platform : MonoBehaviour
     [SerializeField] private bool movingPlatform;
     [SerializeField] private float lowerBound;
     [SerializeField] private float upperBound;
+    [SerializeField] private float speed = 1;
     [SerializeField] private Vector2 direction;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("I am a platform");
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class Platform : MonoBehaviour
                 direction = -direction;
             }
 
-            transform.position = new Vector2(transform.position.x + direction.x * delta, transform.position.y + direction.y * delta);
+            transform.position = new Vector2(transform.position.x + direction.x * delta * speed, transform.position.y + speed*direction.y * delta);
         }
     }
 }

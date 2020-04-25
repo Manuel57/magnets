@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Anziehung
 {
 
-    public static int JumpSpeed = 30;
+    public static int JumpSpeed = 25;
 
     [SerializeField] private MagnetAction pos;
     [SerializeField] private MagnetAction neg;
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         Debug.Log("start");
+        PositionManager.Add(this);
     }
 
     // Update is called once per frame
@@ -45,12 +46,9 @@ public class Player : MonoBehaviour
     public void Switch(Player other)
     {
         PosUp = !PosUp;
+        Enabled = !Enabled;
     }
 
-    public void Force(Vector2 dir)
-    {
-        GetComponent<Rigidbody2D>().AddForce(dir, ForceMode2D.Impulse);
-    }
 
 
     public void Move(Vector2 dir)
@@ -94,7 +92,7 @@ public class Player : MonoBehaviour
 
 
 
-        if (collision.collider.tag.Equals("platform"))
+        if (collision.collider.tag.Equals("platform") || collision.collider.tag.Equals("brick"))
         {
             allowJump = true;
         }

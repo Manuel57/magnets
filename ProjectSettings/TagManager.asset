@@ -8,6 +8,8 @@ TagManager:
   - magnet
   - pos
   - neg
+  - metal
+  - brick
   layers:
   - Default
   - TransparentFX

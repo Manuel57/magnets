@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
                 if (player1.transform.position.y > player2.transform.position.y)
                 {
 
-                    player1.Force(Vector2.up * stoss);
+                    player1.ForceTowards(Vector2.up * stoss);
                     if (stoss > 11)
                     {
                         stoss -= 3;
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
 
-                    player2.Force(Vector2.up * stoss);
+                    player2.ForceTowards(Vector2.up * stoss);
                     if (stoss > 11)
                     {
                         stoss -= 3;
@@ -110,16 +110,16 @@ public class GameManager : MonoBehaviour
                 if (player1.transform.position.y > player2.transform.position.y)
                 {
                     playeryTogether = true;
-                    player1.Force(Vector2.down);
-                    player2.Force(Vector2.up * 3);
+                    player1.ForceTowards(Vector2.down * 5);
+                    player2.ForceTowards(Vector2.up * 7);
 
                 }
                 else
                 {
                     playeryTogether = true;
 
-                    player2.Force(Vector2.down);
-                    player1.Force(Vector2.up * 3);
+                    player2.ForceTowards(Vector2.down * 5);
+                    player1.ForceTowards(Vector2.up *7);
 
                 }
             }
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
     private bool ArePlayersInMagetArea()
     {
         if ((Mathf.Abs(player1.transform.position.x - player2.transform.position.x) < 0.35) &&
-            (Mathf.Abs(player1.transform.position.y - player2.transform.position.y) < 2.2))
+            (Mathf.Abs(player1.transform.position.y - player2.transform.position.y) < 4.2))
         {
             Debug.Log("JETT");
             return true;
