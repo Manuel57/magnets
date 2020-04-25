@@ -63,6 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameManager.cs" />
+    <Compile Include="Assets\MagnetAction.cs" />
+    <Compile Include="Assets\Platform.cs" />
+    <Compile Include="Assets\Player.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Manuel/Documents/uni/ComputerGames/gamejam/magnet/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
