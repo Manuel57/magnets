@@ -8,8 +8,6 @@ public class Player : Anziehung
 
     public static int JumpSpeed = 30;
 
-    [SerializeField] private MagnetAction pos;
-    [SerializeField] private MagnetAction neg;
     public Vector2 Movement { get; set; }
 
 
@@ -78,6 +76,9 @@ public class Player : Anziehung
     {
         if (allowJump)
         {
+
+            GetComponent<Animation>().Play();
+
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * JumpSpeed, ForceMode2D.Impulse);
             allowJump = false;
             PlatformTouched = true;
