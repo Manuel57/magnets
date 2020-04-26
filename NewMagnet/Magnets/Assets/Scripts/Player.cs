@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Player : Anziehung
@@ -9,7 +9,7 @@ public class Player : Anziehung
 
     [SerializeField] private GameObject[] spritePosNeg = new GameObject[2];
 
-    public static int JumpSpeed = 30;
+    public static int JumpSpeed = 40;
 
     public Vector2 Movement { get; set; }
     public Vector2 Movement2 { get; set; }
@@ -17,10 +17,16 @@ public class Player : Anziehung
 
     public bool allowJump = true;
 
-    public bool PosUp { get; set; } = true;
+    public bool PosUp { get; set; } = false;
     public bool PlatformTouched { get; set; } = true;
 
     private Animator animator;
+    private Animation animation;
+
+    private Vector3 initialScale;
+    private Vector3 minScale;
+
+    private bool whileJump = false;
 
 
     // Start is called before the first frame update
@@ -28,13 +34,34 @@ public class Player : Anziehung
     {
         Debug.Log("start");
         PositionManager.Add(this);
-        //animator = GetComponent<Animator>();
-
+        animator = GetComponent<Animator>();
+        animation = GetComponent<Animation>();
+        initialScale = transform.localScale;
+        minScale = transform.localScale / 2;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (whileJump)
+        {
+            Debug.Log("X: " + transform.localScale.y + "  --  " + minScale.y);
+            if (transform.localScale.y > minScale.y)
+            {
+                Debug.Log("CHANGING");
+                transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y - initialScale.y / 10);
+                transform.position = new Vector3(transform.position.x, transform.position.y - initialScale.y / 100, transform.position.z);
+
+            }
+        }
+        else
+        {
+            if (transform.localScale.y < initialScale.y)
+            {
+                transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y + initialScale.y / 10);
+            }
+        }
         Debug.Log("update");
         if (Movement == null || Movement.magnitude == 0)
         {
@@ -45,17 +72,35 @@ public class Player : Anziehung
         transform.position = new Vector3(transform.position.x + Movement.x * delta, transform.position.y, transform.position.z);
 
 
+
+
         Movement = Vector2.zero;
 
+    }
+
+    public void StartJumping(Player player2)
+    {
+        if (!allowJump) return;
+        whileJump = true;
+        Debug.Log("SET TRUE");
+
+        if (spritePosNeg[0].activeSelf)
+            spritePosNeg[0].GetComponent<Animator>().SetBool("IsJumping", true);
+        if (spritePosNeg[1].activeSelf)
+            spritePosNeg[1].GetComponent<Animator>().SetBool("IsJumping", true);
     }
 
     public void Switch(Player other)
     {
         PosUp = !PosUp;
         Enabled = !Enabled;
-        spritePosNeg[0].SetActive(PosUp);
-        spritePosNeg[1].SetActive(!PosUp);
+      //  spritePosNeg[0].SetActive(PosUp);
+      //  spritePosNeg[1].SetActive(!PosUp);
 
+        if (spritePosNeg[0].activeSelf)
+            spritePosNeg[0].GetComponent<Animator>().SetBool("PositiveUp", PosUp);
+        if (spritePosNeg[1].activeSelf)
+            spritePosNeg[1].GetComponent<Animator>().SetBool("IsJumping", PosUp);
     }
 
 
@@ -87,12 +132,15 @@ public class Player : Anziehung
     {
         if (allowJump)
         {
-           // animator.SetBool("IsJumping", true);
+
+        Debug.Log("SET FALSE");
+            whileJump = false;
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * JumpSpeed, ForceMode2D.Impulse);
             allowJump = false;
             PlatformTouched = true;
         }
     }
+
 
     public void MoveE(Vector2 vector2)
     {
@@ -108,6 +156,10 @@ public class Player : Anziehung
 
         if (collision.collider.tag.Equals("platform") || collision.collider.tag.Equals("brick"))
         {
+
+            if (spritePosNeg[0].activeSelf) spritePosNeg[0].GetComponent<Animator>().SetBool("IsJumping", false);
+            if (spritePosNeg[1].activeSelf) spritePosNeg[1].GetComponent<Animator>().SetBool("IsJumping", false);
+
             allowJump = true;
         }
 

@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 public class PositionManager : ScriptableObject
 {
 
     public static System.Collections.ArrayList AllPositionObjects = new System.Collections.ArrayList();
 
-    [MenuItem("Tools/MyTool/Do It in C#")]
-    static void DoIt()
-    {
-    }
 
     public static System.Collections.ArrayList GetObjectsAt(Vector3 l, Vector3 h)
     {

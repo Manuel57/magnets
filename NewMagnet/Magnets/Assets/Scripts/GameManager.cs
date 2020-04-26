@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     private bool playeryTogether = false;
 
-    private int stoss = 40;
+    private int stoss = 20;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +35,11 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
+            player1.StartJumping(player2);
+        }
+
+        if(Input.GetKeyUp(KeyCode.W))
+        {
             player1.Jump(player2);
         }
 
@@ -53,6 +56,10 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            player2.StartJumping(player1);
+        }
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
             player2.Jump(player1);
         }
 
@@ -66,7 +73,7 @@ public class GameManager : MonoBehaviour
             player2.Switch(player1);
         }
 
-        if (ArePlayersInMagetArea(4))
+        if (ArePlayersInMagetArea(6))
         {
             if (player1.PosUp && player2.PosUp || !player1.PosUp && !player2.PosUp)
             {
@@ -110,53 +117,53 @@ public class GameManager : MonoBehaviour
                 if (player1.transform.position.y > player2.transform.position.y)
                 {
                     playeryTogether = true;
-                    player1.ForceTowards(Vector2.down * 5);
-                    player2.ForceTowards(Vector2.up * 7);
+                    player1.ForceTowards(Vector2.down * 20);
+                    player2.ForceTowards(Vector2.up * 15);
 
                 }
                 else
                 {
                     playeryTogether = true;
 
-                    player2.ForceTowards(Vector2.down * 5);
-                    player1.ForceTowards(Vector2.up * 7);
+                    player2.ForceTowards(Vector2.down * 20);
+                    player1.ForceTowards(Vector2.up * 15);
 
                 }
             }
 
 
         }
-         if (ArePlayersInMagetArea(6))
+         if (ArePlayersInMagetArea(8))
         {
             if (player1.PosUp && !player2.PosUp || !player1.PosUp && player2.PosUp)
             {
                 if (player1.transform.position.y > player2.transform.position.y)
                 {
                     playeryTogether = true;
-                    player1.ForceTowards(Vector2.down * 13);
-                    player2.ForceTowards(Vector2.up * 11);
+                    player1.ForceTowards(Vector2.down * 10);
+                    player2.ForceTowards(Vector2.up * 10);
 
                 }
                 else
                 {
                     playeryTogether = true;
 
-                    player2.ForceTowards(Vector2.down * 13);
-                    player1.ForceTowards(Vector2.up * 11);
+                    player2.ForceTowards(Vector2.down * 10);
+                    player1.ForceTowards(Vector2.up * 10);
 
                 }
             }
         }
         else
         {
-            if (player1.PlatformTouched && player1.transform.position.y > player2.transform.position.y && stoss <= 7)
+            if (player1.PlatformTouched && player1.transform.position.y > player2.transform.position.y && stoss <= 6)
             {
-                stoss = 20;
+                stoss = 30;
             }
 
-            if (player2.PlatformTouched && player2.transform.position.y > player2.transform.position.y && stoss <= 7)
+            if (player2.PlatformTouched && player2.transform.position.y > player2.transform.position.y && stoss <= 6)
             {
-                stoss = 20;
+                stoss = 30;
             }
             playeryTogether = false;
 

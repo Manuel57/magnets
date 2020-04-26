@@ -1,15 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
-using System.Collections.Specialized;
+﻿using UnityEngine;
 
 
 public class Metal : MonoBehaviour
 {
 
 
-    [SerializeField] private Vector3 fieldSize = new Vector3(5,50); 
+    [SerializeField] private Vector3 fieldSize = new Vector3(5,50);
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +20,7 @@ public class Metal : MonoBehaviour
         {
             Debug.Log("TAG:  " + item.tag);
             if(item.Enabled)
-            item.ForceTowards((transform.position-item.transform.position).normalized * 3);
+            item.ForceTowards((transform.position-item.transform.position).normalized * 10);
 
         }
     }
