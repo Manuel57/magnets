@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     private bool playeryTogether = false;
 
-    private int stoss = 20;
+    private int stoss = 40;
 
     // Start is called before the first frame update
     void Start()
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             player2.Switch(player1);
         }
 
-        if (ArePlayersInMagetArea())
+        if (ArePlayersInMagetArea(4))
         {
             if (player1.PosUp && player2.PosUp || !player1.PosUp && !player2.PosUp)
             {
@@ -76,14 +76,14 @@ public class GameManager : MonoBehaviour
                 {
 
                     player1.ForceTowards(Vector2.up * stoss);
-                    if (stoss > 11)
+                    if (stoss > 7)
                     {
                         stoss -= 3;
                         player1.allowJump = false;
                     }
                     else
                     {
-                        stoss = 11;
+                        stoss = 7;
                     }
                     player1.PlatformTouched = false;
 
@@ -93,14 +93,14 @@ public class GameManager : MonoBehaviour
                 {
 
                     player2.ForceTowards(Vector2.up * stoss);
-                    if (stoss > 11)
+                    if (stoss > 7)
                     {
                         stoss -= 3;
                         player2.allowJump = false;
                     }
                     else
                     {
-                        stoss = 11;
+                        stoss = 7;
                     }
                     player2.PlatformTouched = false;
                 }
@@ -119,21 +119,42 @@ public class GameManager : MonoBehaviour
                     playeryTogether = true;
 
                     player2.ForceTowards(Vector2.down * 5);
-                    player1.ForceTowards(Vector2.up *7);
+                    player1.ForceTowards(Vector2.up * 7);
 
                 }
             }
 
 
         }
+         if (ArePlayersInMagetArea(6))
+        {
+            if (player1.PosUp && !player2.PosUp || !player1.PosUp && player2.PosUp)
+            {
+                if (player1.transform.position.y > player2.transform.position.y)
+                {
+                    playeryTogether = true;
+                    player1.ForceTowards(Vector2.down * 13);
+                    player2.ForceTowards(Vector2.up * 11);
+
+                }
+                else
+                {
+                    playeryTogether = true;
+
+                    player2.ForceTowards(Vector2.down * 13);
+                    player1.ForceTowards(Vector2.up * 11);
+
+                }
+            }
+        }
         else
         {
-            if (player1.PlatformTouched && player1.transform.position.y > player2.transform.position.y && stoss <= 11)
+            if (player1.PlatformTouched && player1.transform.position.y > player2.transform.position.y && stoss <= 7)
             {
                 stoss = 20;
             }
 
-            if (player2.PlatformTouched && player2.transform.position.y > player2.transform.position.y && stoss <= 11)
+            if (player2.PlatformTouched && player2.transform.position.y > player2.transform.position.y && stoss <= 7)
             {
                 stoss = 20;
             }
@@ -144,10 +165,10 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private bool ArePlayersInMagetArea()
+    private bool ArePlayersInMagetArea(int yD)
     {
-        if ((Mathf.Abs(player1.transform.position.x - player2.transform.position.x) < 0.35) &&
-            (Mathf.Abs(player1.transform.position.y - player2.transform.position.y) < 4.2))
+        if ((Mathf.Abs(player1.transform.position.x - player2.transform.position.x) < 0.5) &&
+            (Mathf.Abs(player1.transform.position.y - player2.transform.position.y) < yD))
         {
             Debug.Log("JETT");
             return true;

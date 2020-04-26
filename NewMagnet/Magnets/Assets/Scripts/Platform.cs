@@ -23,7 +23,10 @@ public class Platform : MonoBehaviour
 
         if (movingPlatform)
         {
-            if (Vector2.Dot(direction,transform.position) <= lowerBound || Vector2.Dot(direction, transform.position) >= upperBound)
+            if (Vector2.Dot(transform.position, Vector2.up) <= lowerBound ||
+                Vector2.Dot(transform.position, Vector2.right) <= lowerBound ||
+                Vector2.Dot(transform.position, Vector2.up) >= upperBound ||
+                Vector2.Dot(transform.position, Vector2.right) >= upperBound)
             {
                 direction = -direction;
             }

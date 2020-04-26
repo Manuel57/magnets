@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : Anziehung
 {
 
-    public static int JumpSpeed = 25;
+    public static int JumpSpeed = 30;
 
     [SerializeField] private MagnetAction pos;
     [SerializeField] private MagnetAction neg;
