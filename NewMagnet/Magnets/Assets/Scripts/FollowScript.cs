@@ -11,6 +11,6 @@ public class FollowScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, new Vector3((target1.position.x + target2.position.x)/2, target1.position.y, transform.position.z), 0.125f);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, (target1.position.y + target2.position.y) / 2, transform.position.z), 0.125f);
     }
 }
