@@ -28,7 +28,7 @@ public class Platform : MonoBehaviour
                 direction = -direction;
             }
 
-            transform.position = new Vector2(transform.position.x + direction.x * delta * speed, transform.position.y + speed*direction.y * delta);
+            transform.position = new Vector3(transform.position.x + direction.x * delta * speed, transform.position.y + speed*direction.y * delta, transform.position.z);
         }
     }
 }

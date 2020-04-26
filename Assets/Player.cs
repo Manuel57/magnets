@@ -36,7 +36,7 @@ public class Player : Anziehung
         }
         float delta = Time.deltaTime * 3;
 
-        transform.position = new Vector3(transform.position.x + Movement.x * delta, transform.position.y);
+        transform.position = new Vector3(transform.position.x + Movement.x * delta, transform.position.y, transform.position.z);
 
 
         Movement = Vector2.zero;

@@ -6,16 +6,11 @@ public class FollowScript : MonoBehaviour
 {
 
 
-    public Transform target;
-    public float smoothSpeed = 0.125f;
-    public Vector3 offset;
+    public Transform target1;
+    public Transform target2;
 
     void FixedUpdate()
     {
-        transform.position =
-           Vector2.Lerp(
-                transform.position, target.transform.position + offset, smoothSpeed);
-
-        transform.LookAt(target);
+        transform.position = Vector3.Lerp(transform.position, new Vector3((target1.position.x + target2.position.x)/2, target1.position.y, transform.position.z), 0.125f);
     }
 }
