@@ -19,7 +19,7 @@ public class Platform : MonoBehaviour
     void Update()
     {
 
-        float delta = Time.deltaTime ;
+        float delta = Time.deltaTime;
 
         if (movingPlatform)
         {
@@ -31,7 +31,12 @@ public class Platform : MonoBehaviour
                 direction = -direction;
             }
 
-            transform.position = new Vector3(transform.position.x + direction.x * delta * speed, transform.position.y + speed*direction.y * delta, transform.position.z);
+            transform.position = new Vector3(transform.position.x + direction.x * delta * speed, transform.position.y + speed * direction.y * delta, transform.position.z);
+            foreach(var item in PositionManager.GetObjectsAt(new Vector3(transform.position.x - transform.localScale.x / 4, 1000), new Vector3(transform.position.x + transform.localScale.x / 4, 1000))) {
+                (item as Player).Right();
+            }
+
+
         }
     }
 }

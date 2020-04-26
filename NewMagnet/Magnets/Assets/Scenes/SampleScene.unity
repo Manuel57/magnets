@@ -888,7 +888,7 @@ PrefabInstance:
     - target: {fileID: 7878230346037099248, guid: 1aee8380cf6ed9945bcd5f08e5d69a84,
         type: 3}
       propertyPath: movingPlatform
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aee8380cf6ed9945bcd5f08e5d69a84, type: 3}
@@ -1431,7 +1431,7 @@ PrefabInstance:
     - target: {fileID: 1831729250421565145, guid: 24dbe8ee2f330f049a4dda22eb8e5e73,
         type: 3}
       propertyPath: fieldSize.x
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1831729250421565145, guid: 24dbe8ee2f330f049a4dda22eb8e5e73,
         type: 3}
