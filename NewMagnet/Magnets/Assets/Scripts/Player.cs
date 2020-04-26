@@ -6,9 +6,13 @@ using UnityEngine;
 public class Player : Anziehung
 {
 
+
+    [SerializeField] private GameObject[] spritePosNeg = new GameObject[2];
+
     public static int JumpSpeed = 30;
 
     public Vector2 Movement { get; set; }
+    public Vector2 Movement2 { get; set; }
 
 
     public bool allowJump = true;
@@ -16,12 +20,16 @@ public class Player : Anziehung
     public bool PosUp { get; set; } = true;
     public bool PlatformTouched { get; set; } = true;
 
+    private Animator animator;
+
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("start");
         PositionManager.Add(this);
+        //animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -45,6 +53,9 @@ public class Player : Anziehung
     {
         PosUp = !PosUp;
         Enabled = !Enabled;
+        spritePosNeg[0].SetActive(PosUp);
+        spritePosNeg[1].SetActive(!PosUp);
+
     }
 
 
@@ -76,15 +87,17 @@ public class Player : Anziehung
     {
         if (allowJump)
         {
-
-            GetComponent<Animation>().Play();
-
+           // animator.SetBool("IsJumping", true);
             GetComponent<Rigidbody2D>().AddForce(Vector2.up * JumpSpeed, ForceMode2D.Impulse);
             allowJump = false;
             PlatformTouched = true;
         }
     }
 
+    public void MoveE(Vector2 vector2)
+    {
+        Movement2 = vector2;
+    }
 
     private bool gt = false;
 

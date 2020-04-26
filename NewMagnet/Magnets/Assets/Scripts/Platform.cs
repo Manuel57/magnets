@@ -9,6 +9,8 @@ public class Platform : MonoBehaviour
     [SerializeField] private float upperBound;
     [SerializeField] private float speed = 1;
     [SerializeField] private Vector2 direction;
+
+      
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +34,10 @@ public class Platform : MonoBehaviour
             }
 
             transform.position = new Vector3(transform.position.x + direction.x * delta * speed, transform.position.y + speed * direction.y * delta, transform.position.z);
-            foreach(var item in PositionManager.GetObjectsAt(new Vector3(transform.position.x - transform.localScale.x / 4, 1000), new Vector3(transform.position.x + transform.localScale.x / 4, 1000))) {
-                (item as Player).Right();
-            }
+            //foreach(var item in PositionManager.GetObjectsAt(new Vector3(transform.position.x - 2, transform.position.y -3), new Vector3(transform.position.x +  2, transform.position.y +3))) {
+            //    Debug.Log("INSIDE: " + (item as Player).tag);
+            //    (item as Player).MoveE(new Vector2(direction.x * speed, 0));
+            //}
 
 
         }
