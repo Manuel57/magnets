@@ -17,7 +17,7 @@ public class Player : Anziehung
 
     public bool allowJump = true;
 
-    public bool PosUp { get; set; } = false;
+    public bool PosUp { get; set; } = true;
     public bool PlatformTouched { get; set; } = true;
 
     private Animator animator;
@@ -38,6 +38,7 @@ public class Player : Anziehung
         animation = GetComponent<Animation>();
         initialScale = transform.localScale;
         minScale = transform.localScale / 2;
+        Enabled = true;
     }
 
     // Update is called once per frame
@@ -100,7 +101,7 @@ public class Player : Anziehung
         if (spritePosNeg[0].activeSelf)
             spritePosNeg[0].GetComponent<Animator>().SetBool("PositiveUp", PosUp);
         if (spritePosNeg[1].activeSelf)
-            spritePosNeg[1].GetComponent<Animator>().SetBool("IsJumping", PosUp);
+            spritePosNeg[1].GetComponent<Animator>().SetBool("PositiveUp", PosUp);
     }
 
 
